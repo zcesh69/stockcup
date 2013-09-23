@@ -80,6 +80,7 @@ li:hover li {
 li:hover a { background: rgba(1, 1, 1, 0.8); }
 li:hover li a:hover { background: rgba(1, 1, 1,1.0); }
 
+/* Search part */
 
 #search_bar {
 	height: auto;
@@ -97,22 +98,24 @@ li:hover li a:hover { background: rgba(1, 1, 1,1.0); }
 #Text {
 	width: 100%;
 	font-size: 20px;
-	margin-top: 250px;
-	line-height: 25px;
+	margin-top: 230px;
+	line-height: 30px;
 	text-align: center;
 	text-shadow: none;	
 }
-/* Adjust title's appearance
+/* Adjust title's appearance */
 #Text h1 {
-	
+	color:#222222;
+	font-size: 50px;
+	font-family:arial;
 }
-*/
+
 
 #Search ,
 #Search_Button {
 	width: 100%;
 	font-size: 20px;
-	line-height: 50px;
+	line-height: 70px;
 	text-align: center;
 	text-shadow: none;	
 }
@@ -120,19 +123,62 @@ li:hover li a:hover { background: rgba(1, 1, 1,1.0); }
 #Search input {
 	width: 500px;
 	font-size: 30px;
+	border: 5px thin grey;
+}#Search input:hover,
+ #Search input:focus {
+	outline-color: rgba(190,196,239,0.8);
 }
 
-#Search input:focus {
-	border: 3pt thin grey;
+.button {
+	-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	box-shadow:inset 0px 1px 0px 0px #ffffff;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ededed), color-stop(1, #dfdfdf) );
+	background:-moz-linear-gradient( center top, #ededed 5%, #dfdfdf 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ededed', endColorstr='#dfdfdf');
+	background-color:#ededed;
+	-webkit-border-top-left-radius:13px;
+	-moz-border-radius-topleft:13px;
+	border-top-left-radius:13px;
+	-webkit-border-top-right-radius:13px;
+	-moz-border-radius-topright:13px;
+	border-top-right-radius:13px;
+	-webkit-border-bottom-right-radius:13px;
+	-moz-border-radius-bottomright:13px;
+	border-bottom-right-radius:13px;
+	-webkit-border-bottom-left-radius:13px;
+	-moz-border-radius-bottomleft:13px;
+	border-bottom-left-radius:13px;
+	text-indent:0px;
+	border:1px solid #dcdcdc;
+	display:inline-block;
+	color:#777777;
+	font-family:arial;
+	font-size:18px;
+	font-weight:bold;
+	font-style:italic;
+	height:50px;
+	line-height:50px;
+	width:100px;
+	text-decoration:none;
+	text-align:center;
+	text-shadow:1px 1px 0px #ffffff;
+	text-decoration: none;
 }
-
-#Search_Button button {
-	background: rgba(1,1,1,0.8);
+.button:hover {
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #dfdfdf), color-stop(1, #ededed) );
+	background:-moz-linear-gradient( center top, #dfdfdf 5%, #ededed 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#dfdfdf', endColorstr='#ededed');
+	background-color:#dfdfdf;
+}.button:active {
+	position:relative;
+	top:1px;
 }
-
+	/*
 #Search_Button button a:visited,
 #Search_Button button a:link {
   	text-decoration: none;
 	color: #FFFFFF;
   	display: block;
 }
+*/
