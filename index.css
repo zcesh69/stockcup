@@ -112,19 +112,27 @@ li:hover li a:hover { background: rgba(1, 1, 1,1.0); }
 #Search_Button {
 	width: 100%;
 	font-size: 20px;
-	line-height: 35px;
+	line-height: 50px;
 	text-align: center;
 	text-shadow: none;	
 }
 
-#Search input: hover,
-#Search input: focus {
-	size: 100px;
-	color: rgba(0,0,1, 0.8);
+#Search input {
+	width: 500px;
+	font-size: 30px;
 }
 
+#Search input:focus {
+	border: 3pt thin grey;
+}
 
+#Search_Button button {
+	background: rgba(1,1,1,0.8);
+}
 
-
-
-
+#Search_Button button a:visited,
+#Search_Button button a:link {
+  	text-decoration: none;
+	color: #FFFFFF;
+  	display: block;
+}
