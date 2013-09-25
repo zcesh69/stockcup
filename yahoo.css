@@ -1,0 +1,92 @@
+body {
+	padding: 0;
+	margin: 0;
+	overflow: hidden;
+}
+
+ul, ol {
+	list-style: none;
+}
+
+#navigation {
+position: fixed;
+top: 0;
+width: 100%;
+height: 100%;
+color: #ffffff;
+height: 35px;
+text-align: center;
+/* Adds shadow to the bottom of the bar */
+-webkit-box-shadow: 0px 0px 8px 0px #000000;
+-moz-box-shadow: 0px 0px 8px 0px #000000;
+box-shadow: 0px 0px 8px 0px #000000;
+/* Adds the transparent background */
+background-color: rgba(1, 1, 1, 0.8);
+color: rgba(1, 1, 1, 0.8);
+}
+
+
+#navigation a:hover {
+color: grey;
+} 
+
+#navigation ul {
+  font-family: Arial, Verdana;
+  font-size: 14px;
+  margin: 0;
+  padding : 0px;
+  list-style: none;
+  height:100%;
+}
+ul li {
+  display: block;
+  position: relative;
+  float: left;
+  width: 150px;
+  height: 100%;
+}
+
+.right-align {
+	float:right;
+}
+
+#navigation li ul { display: none; }
+#navigation ul li a {
+  display: block;
+  padding-top: 10px;
+  height: 26px;
+  text-decoration: none;
+  font-size: 14px;
+  padding-left: 15px; 
+  padding-right: 15px;
+  color: white;
+}
+
+
+#navigation ul li a:hover { background: rgba(1, 1, 1, 0.8); }
+
+
+#navigation li:hover ul {
+  display: block;
+  position: absolute;
+}
+
+
+#navigation li:hover li {
+  float: none;
+  font-size: 11px;
+}
+
+
+#navigation li:hover a { background: rgba(1, 1, 1, 0.8); }
+#navigation li:hover li a:hover { background: rgba(1, 1, 1,1.0); }
+
+/* Search part */
+
+#Search_Bar {
+	position: absolute;
+	top: 35px;
+	width: 100%;
+	height: 60%;
+	z-index: 0;
+}
