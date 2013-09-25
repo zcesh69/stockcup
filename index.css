@@ -94,20 +94,18 @@ ul li {
 /*    Search_Bar       */
 
 #Text {
+	margin-top: 80px;
 	width: 100%;
 	font-size: 20px;
-	margin-top: 200px;
-	line-height: 80px;
+	line-height: 0px;
 	text-align: center;
 	text-shadow: none;	
 }
 /* Adjust title's appearance */
-#Text h1 {
-	color:#F7BE81;
-	font-size: 80px;
-	font-family:arial;
+#Text img {
+	width: 800px;
+	height: 300px;
 }
-
 
 #Search {
 	width: 100%;
