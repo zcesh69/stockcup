@@ -77,6 +77,13 @@ ul li {
   font-size: 11px;
 }
 
+#top_search_bar {
+
+	position :relative;
+	padding-top: 5px;
+
+}
+
 
 #navigation li:hover a { background: rgba(1, 1, 1, 0.8); }
 #navigation li:hover li a:hover { background: rgba(1, 1, 1,1.0); }
