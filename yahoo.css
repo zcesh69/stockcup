@@ -81,6 +81,11 @@ ul li {
 #navigation li:hover a { background: rgba(1, 1, 1, 0.8); }
 #navigation li:hover li a:hover { background: rgba(1, 1, 1,1.0); }
 
+#search_bar {
+	height: auto;
+	margin-top: 5px;
+}
+
 /*     Content part    */
 
 #Content {
