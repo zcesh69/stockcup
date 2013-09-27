@@ -229,4 +229,32 @@ ul li {
 	color: F2B059;
 }
 
+#box_array {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.info_box {
+	text-align: center;
+	height : 100px;
+	position: relative;
+	width : 20%;
+	margin : 0px 0px 0px 0px;
+	float : left;
+	padding: 5px 5px 5px 5px;
+	box-sizing:border-box;
+	-moz-box-sizing:border-box; /* Firefox */
+	border-style:solid;
+	border-width:2px;
+	border-color:#C7C7C7;
+	border-radius:4px;
+}
+
+.info_box > h3 {
+	color: #FF4D00;
+}
+
+.info_box:hover {
+	box-shadow: 8px 8px 3px #888888;
+}
 
