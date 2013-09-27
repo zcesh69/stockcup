@@ -250,7 +250,16 @@ ul li {
 	border-radius:4px;
 }
 
-.info_box > h3 {
+@media all and (max-width:500px) {
+	.info_box {
+		float:none;
+		position:relative;
+		width: 100%;
+	}
+
+}
+
+.info_box > h4 {
 	color: #FF4D00;
 }
 
