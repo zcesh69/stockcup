@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="restful.css">
+	<title>Restful interface</title>
+</head>
+<body>
+	<h2>Restful Interface for stock comp</h2>
+	
+	<table>
+		<thead>
+			<tr>
+				<th>HTTP Method</th>
+				<th>URL Form</th>
+				<th>Parameters</th>
+				<th>Example para</th>
+				<th>Result structures</th>
+				<th>Description</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>GET</td>
+				<td>http://query.yahooapis.com/v1/public/yql?</td>
+				<td>YQL query string</td>
+				<td>q=select * from yahoo.finance.historicaldata where symbol = "YHOO" and startDate = "2009-09-11" and endDate = "2010-03-10" &format=json&diagnostics=true&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=</td>
+				<td>JSON</td>
+				<td>Return the stock and detail of that company</td>
+			</tr>
+			
+			<tr>
+				<td>GET</td>
+				<td>http://query.yahooapis.com/v1/public/yql?</td>
+				<td>YQL query string</td>
+				<td>select * from yahoo.finance.industry where id="112"</td>
+				<td>JSON</td>
+				<td>Return the company name and symbol</td>
+			</tr>
+
+
+			<tr>
+				<td>POST</td>
+				<td>user.php</td>
+				<td>Not specified</td>
+				<td></td>
+				<td>true/false</td>
+				<td>Create user account, return success or fail</td>
+			</tr>
+
+
+			<tr>
+				<td>POST</td>
+				<td>user.php</td>
+				<td>Not specified</td>
+				<td></td>
+				<td>True/false</td>
+				<td>Update User</td>
+			</tr>
+
+
+			<tr>
+							<td>GET</td>
+							<td>list_table.php/</td>
+							<td>user_id</td>
+							<td></td>
+							<td>array of integers</td>
+							<td>Derice list_ids that belongs to that user</td>
+			</tr>
+
+			<tr>
+				<td>POST</td>
+				<td>list_table.php/list_id</td>
+				<td>Not specified</td>
+				<td></td>
+				<td>True/False</td>
+				<td>Update list</td>
+			</tr>
+
+
+			<tr>
+				<td>GET</td>
+				<td>list_table.php/list_id</td>
+				<td>delete</td>
+				<td></td>
+				<td>True/False</td>
+				<td>delete list</td>
+			</tr>
+
+
+			<tr>
+				<td>GET</td>
+				<td>list_table.php/list_id</td>
+				<td>Not specified</td>
+				<td></td>
+				<td>True/False</td>
+				<td>Update list</td>
+			</tr>
+
+
+			<tr>
+				<td>GET</td>
+				<td>list_content.php/list_id</td>
+				<td>Not specified</td>
+				<td></td>
+				<td>Array of strings</td>
+				<td>Derive the Comp symbol name</td>
+			</tr>
+
+
+
+			<tr>
+				<td>POST</td>
+				<td>list_content.php/</td>
+				<td>name of Comp</td>
+				<td></td>
+				<td>True/False</td>
+				<td>Update list</td>
+			</tr>
+
+
+			<tr>
+				<td>POST</td>
+				<td>list_content.php/list_id</td>
+				<td>name of Comp</td>
+				<td></td>
+				<td>True/False</td>
+				<td>Update list</td>
+			</tr>
+
+			<tr>
+				<td>GET</td>
+				<td>list_table.php/list_id</td>
+				<td>delete</td>
+				<td></td>
+				<td>True/False</td>
+				<td>delete list</td>
+			</tr>
+		</tbody>
+	</table>
+
+<h2>Database Schema</h2>
+		<pre>
+
+user_table
+	user_id: INT, primary key, not null
+	username: VARCHAR(45), not null
+	firstname: VARCHAR(45)
+	lastname: VARCHAR(45)
+	password: VARCHAR(45)
+	
+list_table
+	list_id: INT, primary key, foreign key to list_content's id
+	user_id: INT, NOT NULL
+	list_name: VARCHAR(45)
+	data_created: DATETIME			
+
+list_content
+	list_id: INT, compound key with stock_id
+	stock_name: VARCHAR(45), compoundkey with list_id
+
+		</pre>
+
+
+
+</body>
+</html> 
