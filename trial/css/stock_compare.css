@@ -1,0 +1,121 @@
+body {
+	padding: 0;
+	margin: 0;
+}
+
+ul, ol {
+	list-style: none;
+}
+
+#Tags {
+	margin-left: 100px;
+	margin-top: 100px;
+}
+
+#Tags h2 {
+	font-family:arial;
+	padding: 10px;
+}
+
+#Tags h3 {
+	font-family:arial;
+}
+
+
+
+#Tags > ul{
+	margin-left: 100px;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+
+#Tags > ul > li {
+	-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	box-shadow:inset 0px 1px 0px 0px #ffffff;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ededed), color-stop(1, #dfdfdf) );
+	background:-moz-linear-gradient( center top, #ededed 5%, #dfdfdf 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ededed', endColorstr='#dfdfdf');
+	background-color:#ededed;
+	-webkit-border-top-left-radius:6px;
+	-moz-border-radius-topleft:6px;
+	border-top-left-radius:6px;
+	-webkit-border-top-right-radius:6px;
+	-moz-border-radius-topright:6px;
+	border-top-right-radius:6px;
+	-webkit-border-bottom-right-radius:6px;
+	-moz-border-radius-bottomright:6px;
+	border-bottom-right-radius:6px;
+	-webkit-border-bottom-left-radius:6px;
+	-moz-border-radius-bottomleft:6px;
+	border-bottom-left-radius:6px;
+	text-indent:0;
+	border:1px solid #dcdcdc;
+	display:inline-block;
+	color:#777777;
+	font-family:arial;
+	font-size:15px;
+	font-weight:bold;
+	font-style:normal;
+	height:50px;
+	line-height:50px;
+	width:200px;
+	text-decoration:none;
+	text-align:center;
+	text-shadow:1px 1px 0px #ffffff;
+	margin: 5px;
+}
+
+#graph {
+	text-align: center;
+	margin-top: 10px;
+	margin-bottom: 40px;
+}
+
+
+
+
+
+/* Button information line  */
+
+#Button_Line {
+	height: 40px;
+	width: 100%;
+	position: relative;
+}
+
+#Button_Line hr {
+	display: block;
+	margin: 0;
+	opacity: 0.4;
+}
+#Button_Line ul {
+  font-family: Arial, Verdana;
+  font-size: 14px;
+  margin: auto 0 auto;
+  padding : 0px;
+  list-style: none;
+  height:100%;
+}
+
+#Button_Line ul li {
+	margin: 0;
+	display: inline-block;
+	text-decoration: none;
+	float: right;
+	text-align: center;
+	margin: 0 5px 0;
+	font-size: 12pt;
+}
+
+#Button_Line ul li a {
+	position: relative;
+	top: 20%;
+	text-decoration: none;
+	color: black;
+	opacity: 0.8;
+}
+
+

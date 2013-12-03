@@ -46,5 +46,7 @@ YUI({
 
     acNode.ac.on("select", function (e) {
         alert(e.result.raw.name);
+        alert(e.result.raw.symbol);
+        alert(call_YQL(e.result.raw.symbol));
     });
 });

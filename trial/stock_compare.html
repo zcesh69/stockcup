@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Stock Cup</title>
+		<link type="text/css" rel="stylesheet" href="css/stock_compare.css" />
+		<link rel="stylesheet" href="css/bootstrap.css">
+
+	</head>
+
+	<body>
+		<div id="main_container">
+	        
+		        <!-- Navigatoin bar with dropdown menu -->
+			
+			<div class="navbar navbar-default navbar-static-top navbar-inverse">
+				<div class="container">
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						</button>
+						<a href="" class="navbar-brand">Stock Comp</a>
+						
+					</div>
+
+					<div class="navbar-collapse collapse">
+						<ul class="nav navbar-nav">
+							<li><a href="#">Home</a></li>
+							<li><a href="#">About</a></li>
+							<li class="dropdown">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown">Tutorials <b class="caret"></b></a>
+								<ul class="dropdown-menu">
+									<li role="presentation"><a href="">Bootstrap Tutorial</a></li>
+									<li><a href="">Bootstrap Tutorial</a></li>
+									<li><a href="">Bootstrap Tutorial</a></li>
+									<li><a href="">Bootstrap Tutorial</a></li>
+								</ul>
+
+							</li>
+							<li><a href="#"><span class="badge">Content</span></a></li>					
+						</ul>
+						
+						<ul class="nav navbar-nav navbar-right">
+							<li><a href="#register" data-toggle="modal">Register</a></li>
+							<li><a href="#">Login</a></li>
+						</ul>
+
+						<form action="" class="navbar-form navbar-right">
+							<div class="form-group">
+								<input id="ac-input" type="text" class="form-control" placeholder="stock...">
+							</div>
+							<button class="btn btn-default" type="submit">Search</button>
+						</form>
+					</div>
+
+				</div>
+			</div>
+
+			<!-- Info Boxes -->
+			<div id="Tags">	
+				<h2>Yahoo</h2>
+				<img src="http://chart.finance.yahoo.com/z?s=GOOG&t=3d&q=2&l=off&z=1" alt="">
+				<ul>
+					<li>Prev Close: 31.27</li>
+					<li>Open: 31.40</li>
+					<li>Bid: 31.37 x 7700</li>
+					<li>Ask: 31.38 x 2400</li>
+					<li>1y Target Est:	29.50</li>
+					<li>Beta:	0.94</li>
+					<li>P/E (ttm):	8.63</li>
+					<li>EPS (ttm):	3.63</li>
+					<li>Day's Range: 31.12 - 32.03</li>
+					<li>Volume:	18,842,222</li>
+					<li>Avg Vol (3m):	16,418,200</li>
+					<li>52wk Range:	15.55 - 32.03</li>
+				</ul>
+
+			</div>			
+			<div style="clear:both"></div>
+
+			
+			
+		<!-- Button information line -->
+			<div id="Button_Line">
+				<hr>
+				<ul>
+					<li><a href="">Introduction</a></li>
+					<li><a href="">Sponsor</a></li>
+					<li><a href="">About us</a></li>
+				</ul>
+			</div>
+		</div>
+    <script src="js/jquery-1.10.2.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script src="http://yui.yahooapis.com/3.11.0/build/yui/yui-min.js"></script>
+    <script src="js/stock_compare.js"></script>
+    <script src="js/ac_getquote_yahoo.js"></script>
+	</body>
+
+</html>
