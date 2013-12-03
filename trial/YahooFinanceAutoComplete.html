@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+	<title>Trial</title>
+	<link rel="stylesheet" href="css/bootstrap.css">
+	<link href="css/mycss.css" rel="stylesheet">
+    <script src="http://yui.yahooapis.com/3.11.0/build/yui/yui-min.js">
+    </script>
+    
+</head>
+<body>
+	        <!-- Navigatoin bar with dropdown menu -->
+		
+		<div class="navbar navbar-default navbar-static-top navbar-inverse">
+			<div class="container">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					</button>
+					<a href="ex4_modal.html" class="navbar-brand">Stock Comp</a>
+					
+				</div>
+
+				<div class="navbar-collapse collapse">
+					<ul class="nav navbar-nav">
+						<li><a href="#">Home</a></li>
+						<li><a href="#">About</a></li>
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">Tutorials <b class="caret"></b></a>
+							<ul class="dropdown-menu">
+								<li role="presentation"><a href="">Bootstrap Tutorial</a></li>
+								<li><a href="">Bootstrap Tutorial</a></li>
+								<li><a href="">Bootstrap Tutorial</a></li>
+								<li><a href="">Bootstrap Tutorial</a></li>
+							</ul>
+
+						</li>
+						<li><a href="#"><span class="badge">Content</span></a></li>					
+					</ul>
+
+					<form action="" class="navbar-form navbar-right">
+						<div class="form-group">
+							<input type="text" class="form-control" placeholder="Search">
+						</div>
+						<button class="btn btn-default" type="submit">Search</button>
+					</form>
+					
+					<ul class="nav navbar-nav navbar-right">
+						<li><a href="#register" data-toggle="modal">Register</a></li>
+						<li><a href="#">Login</a></li>
+					</ul>
+
+				</div>
+
+			</div>
+		</div>
+
+	
+	<!-- Auto Completion Search Bar -->
+
+	<div class="container yui3-skin-sam">
+		<h2>Yahoo finance auto complete api</h2>
+		<label for="ac-input">Enter an asset (for instance, YAHOO):</label><br>
+		<input id="ac-input" type="text">
+	
+	<script src="ac_getquote_yahoo.js"></script>
+	</div>
+
+
+
+    <script src="js/jquery-1.10.2.js"></script>
+    <script src="js/bootstrap.js"></script>
+</body>
+</html>
