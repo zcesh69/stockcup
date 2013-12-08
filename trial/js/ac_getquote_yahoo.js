@@ -48,7 +48,7 @@ YUI({
         e.preventDefault();
         $("#ac-input").empty();
         $("#ac-input").append(e.result.raw.symbol);
-        call_YQL(e.result.raw);
+        call_YQL(e.result.raw.symbol);
         //alert(e.result.raw.name);
         //alert(e.result.raw.symbol);
         //alert(call_YQL(e.result.raw));

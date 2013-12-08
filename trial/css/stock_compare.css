@@ -7,9 +7,30 @@ ul, ol {
 	list-style: none;
 }
 
+div.page-header {
+	margin-top: 0;
+	padding: 0;
+}
+
+#favorite_button {
+	margin-left: 20px;
+}
+
+.panel-body {
+	padding-top: 0;
+}
+
+div.stock_fig {
+	margin-bottom: 15px;
+	width: 100%;
+	height: 300px;
+	overflow: hidden;
+}
+
+
+
 #Tags {
-	margin-left: 100px;
-	margin-top: 100px;
+	margin-top: 50px;
 }
 
 #Tags h2 {
@@ -17,14 +38,8 @@ ul, ol {
 	padding: 10px;
 }
 
-#Tags h3 {
-	font-family:arial;
-}
-
-
 
 #Tags > ul{
-	margin-left: 100px;
 	list-style: none;
 	margin: 0;
 	padding: 0;
@@ -61,7 +76,7 @@ ul, ol {
 	font-style:normal;
 	height:50px;
 	line-height:50px;
-	width:200px;
+	width:45%;
 	text-decoration:none;
 	text-align:center;
 	text-shadow:1px 1px 0px #ffffff;
