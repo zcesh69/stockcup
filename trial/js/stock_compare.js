@@ -32,6 +32,7 @@ var call_YQL = function(symbol_json) {
 		success: function(todo_json, status, jqXHR) {
 			alert("success");
 			alert(jqXHR.responseText);
+			create_content(todo_json, symbol_json);
 		},
 		error: function(jqXHR, status, error) {
 			alert(jqXHR.responseText);
@@ -46,15 +47,22 @@ var create_content = function (stock_json, symbol_json) {
 	var header = $("<h2></h2>").append(symbol_json.name);
 	var symbol = symbol_json.symbol;
 	
-	var img = $('<img src="' + img_src + '" alt="">');
+
 	var img_src = "http://chart.finance.yahoo.com/z?s="+ symbol + "&t=3d&q=2&l=off&z=1";
+	var img = $('<img src="' + img_src + '" alt="">');
 	var list = $("<ul></ul>");
 
-	for()
+	var stock_results = stock_json.query.results.quote;
+
+	$.each(stock_results, function(name, value){
+		list.append($("<li></li>").append(name + ": " + value));
+	});
+
+	$("#Tags").empty();
 
 	$("#Tags").append(header);
 	$("#Tags").append(img);
-	$('#Tags').append()
+	$('#Tags').append(list);
 
 }
 
