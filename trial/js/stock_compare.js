@@ -20,10 +20,14 @@ var call_YQL = function(symbol_json) {
 
 	var symbol = symbol_json.symbol;
 
-	var para = 'q=select * from yahoo.finance.historicaldata where symbol = "'
+	var para = 'q=select * from yahoo.finance.quotes where symbol in ("' + 
+		symbol + 
+		'") &format=json&env=http://datatables.org/alltables.env&diagnostics=true';
+
+	/*var para = 'q=select * from yahoo.finance.historicaldata where symbol = "'
 	+ symbol + '" and startDate = "' + two_days_ago.toISOString().slice(0,10) + '" and endDate = "' 
 	+ two_days_ago.toISOString().slice(0,10) + 
-	'"&format=json&diagnostics=true&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=';
+	'"&format=json&diagnostics=true&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=';*/
 
 	alert(para);
 	var query_url = yahoo_base_url + para;

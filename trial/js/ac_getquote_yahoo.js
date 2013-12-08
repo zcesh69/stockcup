@@ -46,8 +46,11 @@ YUI({
 
     acNode.ac.on("select", function (e) {
         e.preventDefault();
-        alert(e.result.raw.name);
+        $("#ac-input").empty();
+        $("#ac-input").append(e.result.raw.symbol);
+        call_YQL(e.result.raw);
+        //alert(e.result.raw.name);
         //alert(e.result.raw.symbol);
-        alert(call_YQL(e.result.raw));
+        //alert(call_YQL(e.result.raw));
     });
 });
