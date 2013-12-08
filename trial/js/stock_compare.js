@@ -8,7 +8,7 @@ $(document).ready(function() {
     $('button[name="favorite_button"]').on('click', addToFavorite($(this).data()));
 });
 
-
+var base_url = "http://wwwp.cs.unc.edu/Courses/comp426-f13/cchunhao/stockcup/trial/";
 
 var yahoo_base_url = "http://query.yahooapis.com/v1/public/yql?";
 
@@ -20,7 +20,23 @@ var YQL_stock = "select * from yahoo.finance.stocks where symbol='yhoo'";
 //	two_days_ago.setDate(two_days_ago.getDate() - 2);
 
 var addToFavorite = function(symbol) {
-	
+
+	var query_url = base_url + "database.php";
+	var settings = {
+		type: "POST",
+		success: function(stock_json, status, jqXHR) {
+			alert("success");
+			//alert(jqXHR.responseText);
+			create_content(stock_json);
+		},
+		error: function(jqXHR, status, error) {
+			alert("failure to get data from YQL");
+		},
+		cache: false
+	}
+
+
+	$.ajax(query_url, settings);
 
 }
 
@@ -56,17 +72,16 @@ var call_YQL = function(symbol) {
 var create_content = function (stock_json) {
 
 	var stock_results = stock_json.query.results.quote;
+	var symbol = stock_results.Symbol;
 
 	var header = $("<h3></h3>").append(stock_results.Name).append($("<small></small>")
 		.append(stock_results.symbol));
 
-	var favorite_button = $('<span id="favorite_button"><button name="favorite_button" 
-		class="btn btn-primary">Favorite</button></span>');
+	var favorite_button = $('<span id="favorite_button"><button name="favorite_button" class="btn btn-primary">Favorite</button></span>');
 	favorite_button.data(symbol);
 	favorite_button.appendTo(header);
 	//favorite_button.css("float", "right");
 
-	var symbol = stock_results.Symbol;
 
 	var img_src = "http://chart.finance.yahoo.com/z?s="+ symbol + "&t=1d&q=2&l=off&z=1";
 	var img = $('<img src="' + img_src + '" alt="" width="90%" class="featuredImg">');
@@ -77,14 +92,15 @@ var create_content = function (stock_json) {
 		list.append($("<li></li>").append(name + ": " + value));
 	});
 
-	$("#Tags").empty();
 
+	$(".page-header").empty();
 	$(".page-header").append(header);
 	//$(".page-header").append(favorite_button);
-
+	$(".stock_fig").empty();
 	$(".stock_fig").append(img);
 
 	//$("#Tags").append(img);
+	$("#Tags").empty();
 	$('#Tags').append(list);
 
 }
