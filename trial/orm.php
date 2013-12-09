@@ -3,7 +3,7 @@ date_default_timezone_set('America/New_York');
 
 class Stock
 {
-  private $stock_id;
+  private $list_id;
   private $stock_name;
 
   public static function create($stock_name) {
@@ -14,45 +14,31 @@ class Stock
     
     if ($result) {
       $id = $mysqli->insert_id;
-      return new Stock($id, $stock_name);
+      if ($id == "")
+        return new Stock(20, $stock_name);
+      else
+        return new Stock($id, $stock_name);
+    }
+    return null;
+  }
+
+  public static function findByID($id) {
+    $mysqli = new mysqli("classroom.cs.unc.edu", "cchunhao", "abroad#1", "cchunhaodb");
+
+    $result = $mysqli->query("select * from list_content where list_id = " . $id);
+    if ($result) {
+      if ($result->num_rows == 0) {
+	       return null;
+      }
+
+      $stock_info = $result->fetch_array();
+
+      return new Stock(intval($stock_info['list_id']),
+		      $stock_info['stock_name']);
     }
     return null;
   }
 /*
-  public static function findByID($id) {
-    $mysqli = new mysqli("classroom.cs.unc.edu", "cchunhao", "abroad#1", "cchunhaodb");
-
-    $result = $mysqli->query("select * from Todo where id = " . $id);
-    if ($result) {
-      if ($result->num_rows == 0) {
-	return null;
-      }
-
-      $todo_info = $result->fetch_array();
-
-      if ($todo_info['due_date'] != null) {
-	$due_date = new DateTime($todo_info['due_date']);
-      } else {
-	$due_date = null;
-      }
-
-      if (!$todo_info['complete']) {
-	$complete = false;
-      } else {
-	$complete = true;
-      }
-
-      return new Todo(intval($todo_info['id']),
-		      $todo_info['title'],
-		      $todo_info['note'],
-		      $todo_info['project'],
-		      $due_date,
-		      intval($todo_info['priority']),
-		      $complete);
-    }
-    return null;
-  }
-
   public static function getAllIDs() {
     $mysqli = new mysqli("classroom.cs.unc.edu", "cchunhao", "abroad#1", "cchunhaodb");
 
@@ -66,17 +52,12 @@ class Stock
     }
     return $id_array;
   }
-
-  private function __construct($id, $title, $note, $project, $due_date, $priority, $complete) {
-    $this->id = $id;
-    $this->title = $title;
-    $this->note = $note;
-    $this->project = $project;
-    $this->due_date = $due_date;
-    $this->priority = $priority;
-    $this->complete = $complete;
+  */
+  private function __construct($list_id, $stock_name) {
+    $this->list_id = $list_id;
+    $this->stock_name = $stock_name;
   }
-
+  /*
   public function getID() {
     return $this->id;
   }
@@ -176,7 +157,7 @@ class Stock
 */
   public function getJSON() {
 
-    $json_obj = array('id' => $this->id,
+    $json_obj = array('list_id' => $this->list_id,
 		      'stock_name' => $this->stock_name);
     return json_encode($json_obj);
   }

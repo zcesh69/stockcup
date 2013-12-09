@@ -45,7 +45,7 @@ YUI({
     });
 
     acNode.ac.on("select", function (e) {
-        e.preventDefault();
+        //e.preventDefault();
         $("#ac-input").empty();
         $("#ac-input").append(e.result.raw.symbol);
         call_YQL(e.result.raw.symbol);

@@ -17,30 +17,31 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
       ($path_components[1] != "")) {
 
     // Interpret <id> as integer
-    $stock_id = intval($path_components[1]);
+    $list_id = intval($path_components[1]);
 
     // Look up object via ORM
-    /*$stock = Todo::findByID($todo_id);
+    $stock = Stock::findByID($list_id);
 
-    if ($todo == null) {
+    if ($stock == null) {
       // Todo not found.
       header("HTTP/1.0 404 Not Found");
-      print("Todo id: " . $todo_id . " not found.");
+      print("list id: " . $list_id . " not found.");
       exit();
     }
 
+    /*
     // Check to see if deleting
     if (isset($_REQUEST['delete'])) {
       $todo->delete();
       header("Content-type: application/json");
       print(json_encode(true));
       exit();
-    } 
+    } */
 
     // Normal lookup.
     // Generate JSON encoding as response
     header("Content-type: application/json");
-    print($todo->getJSON());*/
+    print($stock->getJSON());
     exit();
 
   }
@@ -105,10 +106,10 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
       $new_priority = intval($_REQUEST['priority']);
       if (!($new_priority > 0 && $new_priority <= 10)) {
 	header("HTTP/1.0 400 Bad Request");
-	print("Priority value out of range.");*/
+	print("Priority value out of range.");
 	exit();
       }
-    }
+    }*/
 
     /*
     if (isset($_REQUEST['complete'])) {
@@ -163,10 +164,10 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
     }
 
     // Create new stock name via ORM
-    $new_todo = Stock::create($stock_name);
+    $new_stock = Stock::create($stock_name);
 
     // Report if failed
-    if ($new_todo == null) {
+    if ($new_stock == null) {
       header("HTTP/1.0 500 Server Error");
       print("Server couldn't create new todo.");
       exit();
@@ -174,7 +175,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
     
     //Generate JSON encoding of new Todo
     header("Content-type: application/json");
-    print($new_todo->getJSON());
+    print($new_stock->getJSON());
     exit();
   }
 }
