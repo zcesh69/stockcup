@@ -20,28 +20,39 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
     $list_id = intval($path_components[1]);
 
     // Look up object via ORM
-    $stock = Stock::findByID($list_id);
+    $stock_array = Stock::findByListID($list_id);
 
-    if ($stock == null) {
+    if ($stock_array == null) {
       // Todo not found.
       header("HTTP/1.0 404 Not Found");
       print("list id: " . $list_id . " not found.");
       exit();
     }
 
-    /*
+    
     // Check to see if deleting
     if (isset($_REQUEST['delete'])) {
-      $todo->delete();
-      header("Content-type: application/json");
-      print(json_encode(true));
-      exit();
-    } */
+
+      if (!isset($_REQUEST['stock_name'] || ($_REQUEST['stock_name'] == ""))) {
+          header("HTTP/1.0 404 Not Found");
+          print("stock_name isn't set with list id " . $list_id);
+          exit();
+      }
+
+      if (isset($_REQUEST['stock_name'])) {
+        $stock_name = trim($_REQUEST['stock_name']);
+        $stock = Stock::findByKey($list_id, $stock_name);
+        $stock->delete();
+        header("Content-type: application/json");
+        print(json_encode(true));
+        exit();
+      }
+    }
 
     // Normal lookup.
     // Generate JSON encoding as response
     header("Content-type: application/json");
-    print($stock->getJSON());
+    print(json_encode($stock_array));
     exit();
 
   }

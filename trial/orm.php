@@ -22,7 +22,7 @@ class Stock
     return null;
   }
 
-  public static function findByID($id) {
+  public static function findByListID($id) {
     $mysqli = new mysqli("classroom.cs.unc.edu", "cchunhao", "abroad#1", "cchunhaodb");
 
     $result = $mysqli->query("select * from list_content where list_id = " . $id);
@@ -31,28 +31,51 @@ class Stock
 	       return null;
       }
 
-      $stock_info = $result->fetch_array();
+      $stock_name_array = array();
 
-      return new Stock(intval($stock_info['list_id']),
-		      $stock_info['stock_name']);
+      while($next_row = $result->fetch_array()) {
+        $stock_name_array[] = $next_row['stock_name'];
+      }
+
+      return $stock_name_array;
     }
     return null;
   }
-/*
+
+  public static function findByKey($id, $stock_name) {
+    $mysqli = new mysqli("classroom.cs.unc.edu", "cchunhao", "abroad#1", "cchunhaodb");
+
+    $result = $mysqli->query("select * from list_content where list_id = " . $id . 
+      " and stock_name = " . $stock_name);
+
+    if ($result) {
+      if ($result->num_rows == 0) {
+         return null;
+      }
+
+      $stock_info = $result->fetch_array();
+
+      return new Stock(intval($stock_info['list_id']),
+          $stock_info['stock_name']);
+    }
+    return null;
+  }
+
+
   public static function getAllIDs() {
     $mysqli = new mysqli("classroom.cs.unc.edu", "cchunhao", "abroad#1", "cchunhaodb");
 
-    $result = $mysqli->query("select id from Todo");
+    $result = $mysqli->query("select list_id from list_content");
     $id_array = array();
 
     if ($result) {
       while ($next_row = $result->fetch_array()) {
-	$id_array[] = intval($next_row['id']);
+	       $id_array[] = intval($next_row['list_id']);
       }
     }
     return $id_array;
   }
-  */
+  
   private function __construct($list_id, $stock_name) {
     $this->list_id = $list_id;
     $this->stock_name = $stock_name;
@@ -149,12 +172,13 @@ class Stock
 			     " where id=" . $this->id);
     return $result;
   }
-
+*/
   public function delete() {
     $mysqli = new mysqli("classroom.cs.unc.edu", "cchunhao", "abroad#1", "cchunhaodb");
-    $mysqli->query("delete from Todo where id = " . $this->id);
+    $mysqli->query("delete from list_content where list_id = " . $this->id . 
+      " and stock_name = " . $this->stock_name);
   }
-*/
+
   public function getJSON() {
 
     $json_obj = array('list_id' => $this->list_id,
