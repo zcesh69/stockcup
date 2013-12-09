@@ -3,12 +3,12 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Stock Cup</title>
-		<link type="text/css" rel="stylesheet" href="css/stockcup.css" />
+		<link type="text/css" rel="stylesheet" href="stockcup.css" />
 		
 	</head>
 
 	<body>
-		<div id="nav_container">
+		<div id="container">
 			<div id="navigation">
 				
 				<ul id="menu">
@@ -38,7 +38,7 @@
 			
 				<div id="Search_Part">
 					<div id="Search_Group">
-						<div id="Text"><img src="img/Logo.png" alt=""></div>
+						<div id="Text"><img src="Logo.png" alt=""></div>
 						<div id="Search"><input type="search" name="stock_search_front_page"></div>
 						<div id="Search_Button"><a  class="button" href="Yahoo.html">Search</a></div>
 					</div>
@@ -65,7 +65,7 @@
 					<li>52wk Range:	15.55 - 32.03</li>
 				</ul>
 
-				</div>
+			</div>
 			<div style="clear:both"></div>
 			</div>
 		<!-- Button information line -->
