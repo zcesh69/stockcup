@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Stock Cup</title>
-		<link type="text/css" rel="stylesheet" href="stockcup.css" />
+		<link type="text/css" rel="stylesheet" href="css/index.css" />
 		
 	</head>
 
@@ -13,16 +13,10 @@
 				
 				<ul id="menu">
 					
-					<li><a href="">Favourite</a>
+					
+					<li class="right-align"><a href="login.php">Log In</a>
 					    <ul>
-					    	<li><a href="">APPL</a></li>
-					    	<li><a href="">GOOG</a></li>
-					    	<li><a href="">PROC</a></li>
-					    </ul>
-					</li>
-					<li class="right-align"><a href="">Log In</a>
-					    <ul>
-					    	<li><a href="">Sign Up</a></li>
+					    	<li><a href="register.php">Sign Up</a></li>
 					    	<li><a href="">Forgot Password</a></li>
 				    	</ul>
 				  	</li>
@@ -38,34 +32,13 @@
 			
 				<div id="Search_Part">
 					<div id="Search_Group">
-						<div id="Text"><img src="Logo.png" alt=""></div>
+						<div id="Text"><img src="img/Logo.png" alt=""></div>
 						<div id="Search"><input type="search" name="stock_search_front_page"></div>
 						<div id="Search_Button"><a  class="button" href="Yahoo.html">Search</a></div>
 					</div>
 				</div>
 
-				<div id="graph">
-					<img src="Yahoo.png" alt="graph on stock">
-				</div>
-
-			<!-- Info Boxes -->
-				<div id="Tags">
-				<ul>
-					<li>Prev Close: 31.27</li>
-					<li>Open: 31.40</li>
-					<li>Bid: 31.37 x 7700</li>
-					<li>Ask: 31.38 x 2400</li>
-					<li>1y Target Est:	29.50</li>
-					<li>Beta:	0.94</li>
-					<li>P/E (ttm):	8.63</li>
-					<li>EPS (ttm):	3.63</li>
-					<li>Day's Range: 31.12 - 32.03</li>
-					<li>Volume:	18,842,222</li>
-					<li>Avg Vol (3m):	16,418,200</li>
-					<li>52wk Range:	15.55 - 32.03</li>
-				</ul>
-
-			</div>
+				
 			<div style="clear:both"></div>
 			</div>
 		<!-- Button information line -->

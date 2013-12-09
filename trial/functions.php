@@ -10,7 +10,7 @@ function sec_session_start() {
     ini_set('session.use_only_cookies', 1);
     // Gets current cookies params.
     $cookieParams = session_get_cookie_params();
-    session_set_cookie_params($cookieParams["lifetime"],<br /> 
+    session_set_cookie_params($cookieParams["lifetime"], 
         $cookieParams["path"], 
         $cookieParams["domain"], 
         $secure,
@@ -23,8 +23,8 @@ function sec_session_start() {
 
 function login($email, $password, $mysqli) {
     // Using prepared statements means that SQL injection is not possible. 
-    if ($stmt = $mysqli->prepare("SELECT id, username, password, salt 
-        FROM members
+    if ($stmt = $mysqli->prepare("SELECT user_id, username, password, salt 
+        FROM user_table
        WHERE email = ?
         LIMIT 1")) {
         $stmt->bind_param('s', $email);  // Bind "$email" to parameter.
@@ -122,8 +122,8 @@ function login_check($mysqli) {
         $user_browser = $_SERVER['HTTP_USER_AGENT'];
  
         if ($stmt = $mysqli->prepare("SELECT password 
-                                      FROM members 
-                                      WHERE id = ? LIMIT 1")) {
+                                      FROM user_table 
+                                      WHERE user_id = ? LIMIT 1")) {
             // Bind "$user_id" to parameter. 
             $stmt->bind_param('i', $user_id);
             $stmt->execute();   // Execute the prepared query.

@@ -2,8 +2,8 @@
 <html>
     <head>
         <title>Log In</title>
-        <script type="text/JavaScript" src="sha512.js"></script> 
-        <script type="text/JavaScript" src="forms.js"></script> 
+        <script type="text/JavaScript" src="js/sha512.js"></script> 
+        <script type="text/JavaScript" src="js/forms.js"></script> 
     </head>
     <body>
         <?php 
