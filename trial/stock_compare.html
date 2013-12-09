@@ -9,6 +9,12 @@
 	</head>
 
 	<body>
+        <?php 
+            if(isset($_GET['error'])) { 
+                echo 'Error Logging In!'; 
+            }
+            exit(); 
+        ?> 
 		<div id="main_container">
 	        
 		        <!-- Navigatoin bar with dropdown menu -->

@@ -46,6 +46,7 @@ YUI({
 
     acNode.ac.on("select", function (e) {
         //e.preventDefault();
+        change_to_stock_view();
         $("#ac-input").empty();
         $("#ac-input").append(e.result.raw.symbol);
         call_YQL(e.result.raw.symbol);
