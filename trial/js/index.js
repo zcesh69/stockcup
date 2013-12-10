@@ -119,7 +119,7 @@ var addToFavorite = function(symbol, long_name) {
 			updateFavoriteList(list_json);
 		},
 		error: function(jqXHR, status, error) {
-			alert("You've already added!");			
+			alert("Failed!");			
 		},
 		cache: false
 	}

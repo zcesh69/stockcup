@@ -100,7 +100,7 @@ $login_success = login_check($mysqli);
 			<!-- Search Bar -->
 			<div class="container">
 				<div class="row">
-					<div class="col-lg-12">
+					<div class="col-sm-12">
 						<div id="Search_Part">
 							<div id="Search_Group">
 								<div id="Text"><img src="img/Logo.png" alt=""></div>
@@ -118,7 +118,7 @@ $login_success = login_check($mysqli);
 		<div id="info_boxes">
 		<div class="container">
 			<div class="row">
-				<div class="col-lg-9">
+				<div class="col-md-9">
 					<div class="panel panel-default">
 						<div class="panel-body">
 							<div class="page-header">
@@ -136,7 +136,7 @@ $login_success = login_check($mysqli);
 				</div>
 
 				<!-- Side bar  --> 
-				<div id="side_bar" class="col-lg-3">
+				<div id="side_bar" class="col-sm-3">
 
 					<?php
 					foreach ($stock_array as $key => $value) {
