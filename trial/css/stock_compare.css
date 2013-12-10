@@ -7,6 +7,10 @@ ul, ol {
 	list-style: none;
 }
 
+.day_control {
+	width: 90%;
+}
+
 .yui3-aclist-item {
 	background: #EEE;
 }

@@ -27,7 +27,7 @@ $login_success = login_check($mysqli);
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 						</button>
-						<a href="" class="navbar-brand">Stock Comp</a>
+						<a href="" class="navbar-brand">Stock Cup</a>
 						
 					</div>
 
@@ -126,7 +126,9 @@ $login_success = login_check($mysqli);
 							</div>
 							
 							<div class="stock_fig"></div>
+							<div id="day_control">
 
+							</div>
 							<div id="Tags"></div>
 
 
