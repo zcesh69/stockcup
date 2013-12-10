@@ -9,9 +9,21 @@ $(document).ready(function() {
 
     $(".page-header").on('click', 'button', null, function(e) {
     	e.preventDefault();
-    	alert("test");
 
     	addToFavorite($(this).data('symbol'));
+    });
+
+    $("#side_bar").on('click', 'div', null, function(e) {
+    	var symbol = $(this).find('p').text();
+    	e.preventDefault();
+    	change_to_stock_view();
+    	call_YQL(symbol);
+    });
+
+    $("#favorite_list").on('click', 'ul>li', null, function(e) {
+    	e.preventDefault();
+    	change_to_stock_view();
+    	call_YQL($(this).text());
     });
 
 });
@@ -22,15 +34,11 @@ var yahoo_base_url = "http://query.yahooapis.com/v1/public/yql?";
 
 var YQL_stock = "select * from yahoo.finance.stocks where symbol='yhoo'";
 
-//var today = new Date();
-
-//var two_days_ago = new Date();
 //	two_days_ago.setDate(two_days_ago.getDate() - 2);
 
 var addToFavorite = function(symbol) {
-
 	alert(symbol);
-	var query_url = base_url + "database.php";
+	var query_url = base_url + "list_content.php";
 	var settings = {
 		type: "POST",
 		dataType: "json",
@@ -38,9 +46,11 @@ var addToFavorite = function(symbol) {
 		success: function(list_json, status, jqXHR) {
 			alert("success haha");
 			alert(jqXHR.responseText);
+			var list = $('<li><a href="">' + symbol + '</a></li>');
+				$('#favorite_list>ul').append(list);
 		},
 		error: function(jqXHR, status, error) {
-			alert(jqXHR.responseText);			
+			alert("You've already added!");			
 		},
 		cache: false
 	}
@@ -81,19 +91,20 @@ var call_YQL = function(symbol) {
 	}
 
 	$.ajax(query_url, settings);
-	/*var para = 'q=select * from yahoo.finance.historicaldata where symbol = "'
-	+ symbol + '" and startDate = "' + two_days_ago.toISOString().slice(0,10) + '" and endDate = "' 
-	+ two_days_ago.toISOString().slice(0,10) + 
-	'"&format=json&diagnostics=true&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=';*/
 }
 
 var create_content = function (stock_json) {
 
 	var stock_results = stock_json.query.results.quote;
 	var symbol = stock_results.Symbol;
+	var stock_change = $("<p id='change_stock'></p>").append("(" + 
+		stock_results['Change_PercentChange'] + ")");
 
 	var header = $("<h3></h3>").append(stock_results.Name).append($("<small></small>")
-		.append(stock_results.symbol));
+		.append(stock_results.symbol)).append(stock_change);
+
+
+	stock_change.appendTo(header);
 
 	var favorite_button = $('<button class="btn btn-primary">Favorite</button>');
 	favorite_button.data('symbol', symbol);
@@ -109,10 +120,33 @@ var create_content = function (stock_json) {
 
 	var list = $("<ul></ul>");
 
+
+	list.append($("<li></li>").append('Prev. Close' + ": " + 
+		stock_results['PreviousClose']));
+	list.append($("<li></li>").append("Day's range" + ": " + 
+		stock_results['DaysRange']));
+	list.append($("<li></li>").append('Open' + ": " + 
+		stock_results['Open']));
+	list.append($("<li></li>").append('Market Cap' + ": " + 
+		stock_results['MarketCapitalization']));
+	list.append($("<li></li>").append('Bid' + ": " + 
+		stock_results['Bid']));
+	
+	list.append($("<li></li>").append("Vol" + ": " + 
+		stock_results['Volume']));
+	list.append($("<li></li>").append('Ask' + ": " + 
+		stock_results['Ask']));
+	list.append($("<li></li>").append('Avg. Vol' + ": " + 
+		stock_results['AverageDailyVolume']));
+	list.append($("<li></li>").append("Year's Range" + ": " + 
+		stock_results['YearRange']));	
+	list.append($("<li></li>").append('Stock Ex.' + ": " + 
+		stock_results['StockExchange']));
+	/*
 	$.each(stock_results, function(name, value){
 		list.append($("<li></li>").append(name + ": " + value));
 	});
-
+*/
 
 	$(".page-header").empty();
 	$(".page-header").append(header);

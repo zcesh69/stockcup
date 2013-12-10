@@ -1,66 +1,64 @@
 <?php
+include 'db_connect.php';
+include 'functions.php';
+require_once('list_content_orm.php');
+sec_session_start();
 
-require_once('orm.php');
+if (!login_check($mysqli)) {
+  header("HTTP/1.0 404 Not Found");
+  print("Not found user!");
+  exit();
+}
 
 $path_components = explode('/', $_SERVER['PATH_INFO']);
+
+$user_id = intval($_SESSION['user_id']);
 
 // Note that since extra path info starts with '/'
 // First element of path_components is always defined and always empty.
 
 if ($_SERVER['REQUEST_METHOD'] == "GET") {
   // GET means either instance look up, index generation, or deletion
-
-  // Following matches instance URL in form
-  // /todo.php/<id>
-
+/*
   if ((count($path_components) >= 2) &&
       ($path_components[1] != "")) {
 
-    // Interpret <id> as integer
-    $list_id = intval($path_components[1]);
-
-    // Look up object via ORM
-    $stock_array = Stock::findByListID($list_id);
-
-    if ($stock_array == null) {
-      // Todo not found.
       header("HTTP/1.0 404 Not Found");
-      print("list id: " . $list_id . " not found.");
+      print("Bad request.");
       exit();
     }
 
-    
     // Check to see if deleting
     if (isset($_REQUEST['delete'])) {
 
       if (!isset($_REQUEST['stock_name'] || ($_REQUEST['stock_name'] == ""))) {
           header("HTTP/1.0 404 Not Found");
-          print("stock_name isn't set with list id " . $list_id);
+          print("stock_name isn't set with user id " . $user_id);
           exit();
       }
 
-      if (isset($_REQUEST['stock_name'])) {
-        $stock_name = trim($_REQUEST['stock_name']);
-        $stock = Stock::findByKey($list_id, $stock_name);
-        $stock->delete();
-        header("Content-type: application/json");
-        print(json_encode(true));
+      $stock_name = trim($_REQUEST['stock_name']);
+      $stock = Stock::findByKey($user_id, $stock_name);
+      $result = $stock->delete();
+
+      if ($result == false) {
+        header("HTTP/1.0 500 Server error");
+        print("server can't delete that stock.");
         exit();
       }
-    }
 
+      header("Content-type: application/json");
+      print(json_encode(true));
+      exit();
+    
+    }*/
     // Normal lookup.
     // Generate JSON encoding as response
+    $stock_array = Stock::findByUserID($user_id);
+
     header("Content-type: application/json");
     print(json_encode($stock_array));
     exit();
-
-  }
-
-  // ID not specified, then must be asking for index
-  header("Content-type: application/json");
-  //print(json_encode(Todo::getAllIDs()));
-  exit();
 
 } else if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
@@ -175,7 +173,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
     }
 
     // Create new stock name via ORM
-    $new_stock = Stock::create($stock_name);
+    $new_stock = Stock::create($user_id, $stock_name);
 
     // Report if failed
     if ($new_stock == null) {

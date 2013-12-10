@@ -1,3 +1,12 @@
+<?php
+include 'db_connect.php';
+include 'functions.php';
+require_once('list_content_orm.php');
+sec_session_start(); 
+
+$login_success = login_check($mysqli);
+
+?>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -24,25 +33,42 @@
 
 					<div class="navbar-collapse collapse">
 						<ul class="nav navbar-nav">
-							<li><a href="#">Home</a></li>
 							<li><a href="#">About</a></li>
-							<li class="dropdown">
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown">Tutorials <b class="caret"></b></a>
+							<?php
+								if ($login_success) {
+									$user_id = intval($_SESSION['user_id']);
+									$stock_array = Stock::findByUserID($user_id);
+								
+							?>
+							<li class="dropdown" id="favorite_list">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown">Favorite <b class="caret"></b></a>
 								<ul class="dropdown-menu">
-									<li role="presentation"><a href="">Bootstrap Tutorial</a></li>
-									<li><a href="">Bootstrap Tutorial</a></li>
-									<li><a href="">Bootstrap Tutorial</a></li>
-									<li><a href="">Bootstrap Tutorial</a></li>
+									<?php
+									foreach ($stock_array as $key => $value) {
+										print('<li><a href="">' . $value . '</a></li>');
+									}
+									?>
 								</ul>
 
 							</li>
-							<li><a href="#"><span class="badge">Content</span></a></li>					
+							<?php
+								}
+							?>
 						</ul>
-	
 
 						<ul class="nav navbar-nav navbar-right">
-							<li><a href="#register" data-toggle="modal">Register</a></li>
-							<li><a href="#">Login</a></li>
+							<li><a href="register.php">Register</a></li>
+							<?php
+							if ($login_success) {
+							?>
+							<li><a href="logout.php">Logout</a></li>
+							<?php
+							} else { ?>
+							<li><a href="#login" data-toggle="modal">Login</a></li>
+							<?php
+							}
+							?>
+
 						</ul>
 
 						<form id="top_search_form"action="" class="navbar-form navbar-right">
@@ -56,17 +82,35 @@
 				</div>
 			</div>
 
-
-			<div id="bodypart">
-			<!-- Search Bar -->
-			
-				<div id="Search_Part">
-					<div id="Search_Group">
-						<div id="Text"><img src="img/Logo.png" alt=""></div>
-						<div id="Search"><input type="search" name="stock_search_front_page"></div>
-						<div id="Search_Button"><a  class="button" href="Yahoo.html">Search</a></div>
+			<?php
+			if (isset($_GET['error'])) {
+			?>
+			<div id="error_msg" class="container">
+				<div class="col-lg-12">
+					<div class="alert alert-danger alert-dismissable">
+					<button class="close" type="button" data-dismiss="alert">&times;</button>
+					Login Error
 					</div>
 				</div>
+			</div>
+			<?php
+			}
+			?>			
+			<div id="bodypart">
+			<!-- Search Bar -->
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12">
+						<div id="Search_Part">
+							<div id="Search_Group">
+								<div id="Text"><img src="img/Logo.png" alt=""></div>
+								<div id="Search"><input type="search" name="stock_search_front_page"></div>
+								<div id="Search_Button"><a  class="button" href="Yahoo.html">Search</a></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 			</div>
 
 
@@ -89,30 +133,19 @@
 					</div>	
 				</div>
 
-				<!-- Side bar 
-				<div class="col-lg-3">
-					<div class="list-group">
-						<a href="#" class="list-group-item active">
-							<h4 class="list-group-item-heading">Lorem ipsum</h4>
-							<p class="list-group-item-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-						</a>
-					</div>
-		
-					<div class="list-group">
-						<a href="#" class="list-group-item">
-							<h4 class="list-group-item-heading">Lorem ipsum</h4>
-							<p class="list-group-item-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-						</a>
-					</div>
+				<!-- Side bar  --> 
+				<div id="side_bar" class="col-lg-3">
 
-					<div class="list-group">
-						<a href="#" class="list-group-item">
-							<h4 class="list-group-item-heading">Lorem ipsum</h4>
-							<p class="list-group-item-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-						</a>
-					</div>		
+					<?php
+					foreach ($stock_array as $key => $value) {
+						print('<div class="list-group">');
+						print('<a href="#" class="list-group-item">');
+						print('<p class="list-group-item-text">' . 
+							$value . '</p></a></div>');
+					}
+					?>
 				</div>	
-				-->
+				
 
 			</div>
 		</div>			
@@ -131,14 +164,15 @@
 				</ul>
 			</div>
 
-			<div class="modal fade" id="register" role="dialog">
+			<!-- login form -->
+			<div class="modal fade" id="login" role="dialog">
 				<div class="modal-dialog">
 					<div class="modal-content">
 						<form action="process_login.php" method="post" name="login_form"
 						class="form-horizontal">
 
 							<div class="modal-header">
-								<h4>Register</h4>
+								<h4>Login</h4>
 							</div>
 							<div class="modal-body">
 									<div class="form-group">
