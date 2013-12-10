@@ -76,8 +76,8 @@ if (isset($_POST['username'], $_POST['email'], $_POST['p'])) {
     <head>
         <meta charset="UTF-8">
         <title>Registration Form</title>
-        <script type="text/JavaScript" src="sha512.js"></script> 
-        <script type="text/JavaScript" src="forms.js"></script>
+        <script type="text/JavaScript" src="js/sha512.js"></script> 
+        <script type="text/JavaScript" src="js/forms.js"></script>
           <style>
             .error {color: red;}
         </style>
