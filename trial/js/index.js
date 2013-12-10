@@ -1,5 +1,4 @@
 $(document).ready(function() {
-    alert("Your initialization code goes here!");
 
 	change_to_search_view();
 
@@ -73,15 +72,13 @@ var updateFavoriteList = function(list_json) {
 }
 
 var addToFavorite = function(symbol, long_name) {
-	alert(symbol);
 	var query_url = base_url + "list_content.php";
 	var settings = {
 		type: "POST",
 		dataType: "json",
 		data: 'stock_name=' + symbol + '&stock_long_name=' + long_name,
 		success: function(list_json, status, jqXHR) {
-			alert("success haha");
-			alert(jqXHR.responseText);
+			//alert(jqXHR.responseText);
 			updateFavoriteList(list_json);
 		},
 		error: function(jqXHR, status, error) {
@@ -96,14 +93,10 @@ var addToFavorite = function(symbol, long_name) {
 
 var change_to_stock_view = function() {
 	$('#bodypart').hide();
-	//$('#search_input').remove();
-	//$('#ac-input').addClass('yui3-aclist-input');
-	$('#top_search_form').show();
 	$('#info_boxes').show();
 }
 var change_to_search_view = function() {
 	$('#info_boxes').hide();
-	//$('#top_search_form').hide();
 	$('#bodypart').show();	
 }
 
@@ -118,7 +111,6 @@ var call_YQL = function(symbol) {
 	var settings = {
 		type: "GET",
 		success: function(stock_json, status, jqXHR) {
-			alert("success");
 			//alert(jqXHR.responseText);
 			create_content(stock_json);
 		},

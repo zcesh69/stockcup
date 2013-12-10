@@ -12,7 +12,6 @@ $login_success = login_check($mysqli);
 	<head>
 		<meta charset="UTF-8">
 		<title>Stock Cup</title>
-		<link type="text/css" rel="stylesheet" href="css/stock_compare.css" />
 		<link rel="stylesheet" href="css/bootstrap.css">
 		<link rel="stylesheet" href="css/index.css">
 	</head>
