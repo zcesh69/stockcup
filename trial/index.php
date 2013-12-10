@@ -37,15 +37,16 @@ $login_success = login_check($mysqli);
 							<?php
 								if ($login_success) {
 									$user_id = intval($_SESSION['user_id']);
-									$stock_array = Stock::findByUserID($user_id);
-								
+									$stock_array = Stock::findNameByUserID($user_id);
+									$stock_symbol_array = Stock::findByUserID($user_id);
 							?>
 							<li class="dropdown" id="favorite_list">
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown">Favorite <b class="caret"></b></a>
 								<ul class="dropdown-menu">
 									<?php
 									foreach ($stock_array as $key => $value) {
-										print('<li><a href="">' . $value . '</a></li>');
+										print('<li><a href="">' . $value . "(" . 
+											$stock_symbol_array[$key] . ")" . '</a></li>');
 									}
 									?>
 								</ul>
@@ -73,7 +74,7 @@ $login_success = login_check($mysqli);
 
 						<form id="top_search_form"action="" class="navbar-form navbar-right">
 							<div class="form-group">
-								<input id="ac-input" type="text" class="form-control" placeholder="stock...">
+								<input id="ac-input" type="text" class="form-control ac-input" placeholder="stock...">
 							</div>
 							<button class="btn btn-default" type="submit">Search</button>
 						</form>
@@ -104,7 +105,7 @@ $login_success = login_check($mysqli);
 						<div id="Search_Part">
 							<div id="Search_Group">
 								<div id="Text"><img src="img/Logo.png" alt=""></div>
-								<div id="Search"><input type="search" name="stock_search_front_page"></div>
+								<div id="Search" class="yui3-skin-sam"><input id="search_input" type="search" name="stock_search_front_page"></div>
 								<div id="Search_Button"><a  class="button" href="Yahoo.html">Search</a></div>
 							</div>
 						</div>
@@ -141,7 +142,7 @@ $login_success = login_check($mysqli);
 						print('<div class="list-group">');
 						print('<a href="#" class="list-group-item">');
 						print('<p class="list-group-item-text">' . 
-							$value . '</p></a></div>');
+							$value . "(" . $stock_symbol_array[$key] . ")" . '</p></a></div>');
 					}
 					?>
 				</div>	
@@ -203,9 +204,10 @@ $login_success = login_check($mysqli);
 
     <script src="js/jquery-1.10.2.js"></script>
     <script src="js/bootstrap.js"></script>
-    <script src="http://yui.yahooapis.com/3.11.0/build/yui/yui-min.js"></script>
     <script src="js/index.js"></script>
+    <script src="http://yui.yahooapis.com/3.11.0/build/yui/yui-min.js"></script>
 	<script src="js/ac_getquote_yahoo.js"></script>
+	<script src="js/ac_getquote_yahoo2.js"></script>
     <script type="text/JavaScript" src="js/sha512.js"></script> 
     <script type="text/JavaScript" src="js/forms.js"></script>
 	</body>

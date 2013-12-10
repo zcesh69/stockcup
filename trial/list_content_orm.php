@@ -5,16 +5,18 @@ class Stock
 {
   private $user_id;
   private $stock_name;
+  private $stock_long_name;
 
-  public static function create($user_id, $stock_name) {
+  public static function create($user_id, $stock_name, $stock_long_name) {
     $mysqli = new mysqli("classroom.cs.unc.edu", "cchunhao", "abroad#1", "cchunhaodb");
 
     $result = $mysqli->query("insert into list_content values (". $user_id ." , " .
-			     "'" . $mysqli->real_escape_string($stock_name) . "')");
+			     "'" . $mysqli->real_escape_string($stock_name) . "'" .
+           " , " . "'" . $mysqli->real_escape_string($stock_long_name) . "')");
     
     if ($result) {
       //$id = $mysqli->insert_id;
-        return new Stock($user_id, $stock_name);
+        return new Stock($user_id, $stock_name, $stock_long_name);
     }
     return null;
   }
@@ -33,7 +35,25 @@ class Stock
       while($next_row = $result->fetch_array()) {
         $stock_name_array[] = $next_row['stock_name'];
       }
+      return $stock_name_array;
+    }
+    return null;
+  }
 
+  public static function findNameByUserID($id) {
+    $mysqli = new mysqli("classroom.cs.unc.edu", "cchunhao", "abroad#1", "cchunhaodb");
+
+    $result = $mysqli->query("select * from list_content where user_id = " . $id);
+    if ($result) {
+      if ($result->num_rows == 0) {
+         return null;
+      }
+
+      $stock_name_array = array();
+
+      while($next_row = $result->fetch_array()) {
+        $stock_name_array[] = $next_row['stock_long_name'];
+      }
       return $stock_name_array;
     }
     return null;
@@ -43,19 +63,11 @@ class Stock
     $mysqli = new mysqli("classroom.cs.unc.edu", "cchunhao", "abroad#1", "cchunhaodb");
 
     $result = $mysqli->query("select * from list_content where user_id = " . $user_id . 
-      " and stock_name = " . $stock_name);
-
-    if ($result) {
-      if ($result->num_rows == 0) {
-         return null;
-      }
-
-      $stock_info = $result->fetch_array();
-
-      return new Stock(intval($stock_info['user_id']),
-          $stock_info['stock_name']);
-    }
-    return null;
+      " AND stock_name = '" . $stock_name . "'");
+    
+    $stock_info = $result->fetch_array();
+    
+    return $stock_info;
   }
 
 
@@ -72,10 +84,11 @@ class Stock
     }
     return $id_array;
   }
-  
-  private function __construct($user_id, $stock_name) {
+
+  private function __construct($user_id, $stock_name, $stock_long_name) {
     $this->user_id = $user_id;
     $this->stock_name = $stock_name;
+    $this->stock_long_name = $stock_long_name;
   }
   /*
   public function getID() {
@@ -170,19 +183,22 @@ class Stock
     return $result;
   }
 */
-  public function delete() {
+  public static function delete($array) {
     $mysqli = new mysqli("classroom.cs.unc.edu", "cchunhao", "abroad#1", "cchunhaodb");
-    $result = $mysqli->query("delete from list_content where list_id = " . $this->user_id . 
-      " and stock_name = " . $this->stock_name);
+    $result = $mysqli->query("delete from list_content where user_id='" . $array[0] . 
+      "' and stock_name='" . $array[1] . "'");
+    
     if ($result == null) {
       return false;
     }
+    return true;
   }
 
   public function getJSON() {
 
     $json_obj = array('user_id' => $this->user_id,
-		      'stock_name' => $this->stock_name);
+		      'stock_name' => $this->stock_name,
+          'stock_long_name' => $this->stock_long_name);
     return json_encode($json_obj);
   }
 

@@ -19,7 +19,7 @@ $user_id = intval($_SESSION['user_id']);
 
 if ($_SERVER['REQUEST_METHOD'] == "GET") {
   // GET means either instance look up, index generation, or deletion
-/*
+
   if ((count($path_components) >= 2) &&
       ($path_components[1] != "")) {
 
@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
     // Check to see if deleting
     if (isset($_REQUEST['delete'])) {
 
-      if (!isset($_REQUEST['stock_name'] || ($_REQUEST['stock_name'] == ""))) {
+      if (!isset($_REQUEST['stock_name'])) {
           header("HTTP/1.0 404 Not Found");
           print("stock_name isn't set with user id " . $user_id);
           exit();
@@ -39,19 +39,24 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
 
       $stock_name = trim($_REQUEST['stock_name']);
       $stock = Stock::findByKey($user_id, $stock_name);
-      $result = $stock->delete();
-
+      
+      if ($stock != null) {
+        $result = Stock::delete($stock);
+      } else {
+        $result = false;
+      }
+      
       if ($result == false) {
         header("HTTP/1.0 500 Server error");
-        print("server can't delete that stock.");
+        print("server can't delete that stock. With " . $stock_name . " and id = " . $user_id);
         exit();
       }
-
-      header("Content-type: application/json");
-      print(json_encode(true));
+      
+      header("HTTP/1.0 404 Not Found");
+      print("id = " . $stock[0] . " name = " . $stock[1] . " result = " . $result);
       exit();
     
-    }*/
+    }
     // Normal lookup.
     // Generate JSON encoding as response
     $stock_array = Stock::findByUserID($user_id);
@@ -159,21 +164,22 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
     // Creating a new Todo item
 
     // Validate values
-    if (!isset($_REQUEST['stock_name'])) {
+    if (!isset($_REQUEST['stock_name']) || !isset($_REQUEST['stock_long_name'])) {
       header("HTTP/1.0 400 Bad Request");
       print("Missing title");
       exit();
     }
     
     $stock_name = trim($_REQUEST['stock_name']);
-    if ($stock_name == "") {
+    $stock_long_name = trim($_REQUEST['stock_long_name']);
+    if ($stock_name == "" || $stock_long_name == "") {
       header("HTTP/1.0 400 Bad Request");
       print("Bad title");
       exit();
     }
 
     // Create new stock name via ORM
-    $new_stock = Stock::create($user_id, $stock_name);
+    $new_stock = Stock::create($user_id, $stock_name, $stock_long_name);
 
     // Report if failed
     if ($new_stock == null) {

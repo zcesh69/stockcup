@@ -9,7 +9,7 @@ YAHOO.util.ScriptNodeDataSource = {};
 YUI({
     filter: "raw"
 }).use("datasource", "autocomplete", "highlight", function (Y) {
-    var oDS, acNode = Y.one(".ac-input");
+    var oDS, acNode = Y.one("#search_input");
 
     oDS = new Y.DataSource.Get({
         source: "http://d.yimg.com/aq/autoc?query=",

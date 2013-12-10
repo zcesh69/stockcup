@@ -1,7 +1,10 @@
 $(document).ready(function() {
     alert("Your initialization code goes here!");
 
-    $('#info_boxes').hide();
+	change_to_search_view();
+
+	/* check favorite list to see if it's already in list */
+
 
     $("#top_search_form").on('submit', function(e) {
     	e.preventDefault();
@@ -10,12 +13,13 @@ $(document).ready(function() {
     $(".page-header").on('click', 'button', null, function(e) {
     	e.preventDefault();
 
-    	addToFavorite($(this).data('symbol'));
+    	addToFavorite($(this).data('symbol'), $(this).data('long_name'));
     });
 
     $("#side_bar").on('click', 'div', null, function(e) {
-    	var symbol = $(this).find('p').text();
     	e.preventDefault();
+    	var text = $(this).find('p').text();
+      	var symbol = trimToSymbol(text);
     	change_to_stock_view();
     	call_YQL(symbol);
     });
@@ -23,7 +27,7 @@ $(document).ready(function() {
     $("#favorite_list").on('click', 'ul>li', null, function(e) {
     	e.preventDefault();
     	change_to_stock_view();
-    	call_YQL($(this).text());
+    	call_YQL(trimToSymbol($(this).text()));
     });
 
 });
@@ -36,18 +40,39 @@ var YQL_stock = "select * from yahoo.finance.stocks where symbol='yhoo'";
 
 //	two_days_ago.setDate(two_days_ago.getDate() - 2);
 
-var addToFavorite = function(symbol) {
+var trimToSymbol = function(string) {
+    var tempArray = string.split('(');
+    var symbol = (tempArray[1].split(')'))[0];
+    return symbol;
+}
+
+var updateFavoriteList = function(list_json) {
+	var symbol = list_json.stock_name;
+	var long_name = list_json.stock_long_name;
+	var list = $('<li><a href="">' + long_name + "(" + symbol + ")" + '</a></li>');
+
+	var div_list = $('<div class="list-group"></div>');
+	var a_list = $('<a href="#" class="list-group-item"></a>');
+	var p_list = $('<p class="list-group-item-text"></p>');
+
+	p_list.append(long_name + "(" + symbol + ")");
+	a_list.append(p_list).appendTo(div_list);
+								
+	$('#favorite_list>ul').append(list);
+	$('#side_bar').append(div_list);
+}
+
+var addToFavorite = function(symbol, long_name) {
 	alert(symbol);
 	var query_url = base_url + "list_content.php";
 	var settings = {
 		type: "POST",
 		dataType: "json",
-		data: 'stock_name=' + symbol,
+		data: 'stock_name=' + symbol + '&stock_long_name=' + long_name,
 		success: function(list_json, status, jqXHR) {
 			alert("success haha");
 			alert(jqXHR.responseText);
-			var list = $('<li><a href="">' + symbol + '</a></li>');
-				$('#favorite_list>ul').append(list);
+			updateFavoriteList(list_json);
 		},
 		error: function(jqXHR, status, error) {
 			alert("You've already added!");			
@@ -61,10 +86,14 @@ var addToFavorite = function(symbol) {
 
 var change_to_stock_view = function() {
 	$('#bodypart').hide();
+	//$('#search_input').remove();
+	//$('#ac-input').addClass('yui3-aclist-input');
+	$('#top_search_form').show();
 	$('#info_boxes').show();
 }
 var change_to_search_view = function() {
 	$('#info_boxes').hide();
+	//$('#top_search_form').hide();
 	$('#bodypart').show();	
 }
 
@@ -97,10 +126,11 @@ var create_content = function (stock_json) {
 
 	var stock_results = stock_json.query.results.quote;
 	var symbol = stock_results.Symbol;
+	var long_name = stock_results.Name;
 	var stock_change = $("<p id='change_stock'></p>").append("(" + 
 		stock_results['Change_PercentChange'] + ")");
 
-	var header = $("<h3></h3>").append(stock_results.Name).append($("<small></small>")
+	var header = $("<h3></h3>").append(long_name).append($("<small></small>")
 		.append(stock_results.symbol)).append(stock_change);
 
 
@@ -108,6 +138,7 @@ var create_content = function (stock_json) {
 
 	var favorite_button = $('<button class="btn btn-primary">Favorite</button>');
 	favorite_button.data('symbol', symbol);
+	favorite_button.data('long_name', long_name);
 
 	var button_wrap = $('<span id="button_wrap"></span>').append(favorite_button);
 	//button_wrap.data('symbol', symbol);
