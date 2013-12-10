@@ -7,6 +7,10 @@ ul, ol {
 	list-style: none;
 }
 
+#cross {
+	float: right;
+}
+
 .day_control {
 	width: 90%;
 }

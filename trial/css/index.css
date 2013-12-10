@@ -201,7 +201,9 @@ div.stock_fig {
 	text-align: center;
 }
 
-
+.cancel {
+	float: right;
+}
 
 /* Button information line  */
 

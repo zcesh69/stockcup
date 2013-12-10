@@ -52,8 +52,8 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
         exit();
       }
       
-      header("HTTP/1.0 404 Not Found");
-      print("id = " . $stock[0] . " name = " . $stock[1] . " result = " . $result);
+      header("Content-type: application/json");
+      print(json_encode(true));
       exit();
     
     }

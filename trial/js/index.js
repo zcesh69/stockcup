@@ -22,6 +22,12 @@ $(document).ready(function() {
     	call_YQL(symbol);
     });
 
+    /* cancel button */
+    $("#side_bar").on('click', '.cancel', null, function(e) {
+    	e.stopPropagation();
+    	delete_favorite($(this));
+    });
+
     $("#favorite_list").on('click', 'ul>li', null, function(e) {
     	e.preventDefault();
     	change_to_stock_view();
@@ -35,12 +41,8 @@ $(document).ready(function() {
 });
 
 var base_url = "http://wwwp.cs.unc.edu/Courses/comp426-f13/cchunhao/final/trial/";
-
 var yahoo_base_url = "http://query.yahooapis.com/v1/public/yql?";
-
 var YQL_stock = "select * from yahoo.finance.stocks where symbol='yhoo'";
-
-//	two_days_ago.setDate(two_days_ago.getDate() - 2);
 
 var change_fig_time = function (symbol, time) {
 	var img_src_url = 'http://chart.finance.yahoo.com/z?s='+ symbol + "&t=" + time + 
@@ -55,6 +57,39 @@ var trimToSymbol = function(string) {
     return symbol;
 }
 
+var delete_favorite = function(object) {
+    var text = object.parent().text();
+    var symbol = trimToSymbol(text);
+
+	var query_url = base_url + "list_content.php" + "?delete=1&stock_name=" + symbol;
+	var settings = {
+		type: "GET",
+		success: function(list_json, status, jqXHR) {
+			removeFavoriteList(object);
+		},
+		error: function(jqXHR, status, error) {
+			alert("Delete failed!");			
+		},
+		cache: false
+	}
+
+	$.ajax(query_url, settings);	
+}
+
+var removeFavoriteList = function(remove_object) {
+    var text = remove_object.parent().text();
+	var list = remove_object.parents('div.list-group');
+	list.remove();
+
+	var group = $('#favorite_list ul li');
+	for (var i = 0; i < group.length; i++) {
+		if ($(group[i]).text() == text) {
+			$(group[i]).remove();
+			break;
+		}
+	}
+}
+
 var updateFavoriteList = function(list_json) {
 	var symbol = list_json.stock_name;
 	var long_name = list_json.stock_long_name;
@@ -63,8 +98,10 @@ var updateFavoriteList = function(list_json) {
 	var div_list = $('<div class="list-group"></div>');
 	var a_list = $('<a href="#" class="list-group-item"></a>');
 	var p_list = $('<p class="list-group-item-text"></p>');
+	var cancel_list = $('<span class="cancel glyphicon glyphicon-remove"</span>');
 
 	p_list.append(long_name + "(" + symbol + ")");
+	p_list.append(cancel_list);
 	a_list.append(p_list).appendTo(div_list);
 								
 	$('#favorite_list>ul').append(list);
@@ -136,17 +173,16 @@ var create_content = function (stock_json) {
 
 
 	stock_change.appendTo(header);
+	
+	// In order to hide the button 'favorite', detect the login button existing or not
 
 	var favorite_button = $('<button class="btn btn-primary">Favorite</button>');
 	favorite_button.data('symbol', symbol);
 	favorite_button.data('long_name', long_name);
 
 	var button_wrap = $('<span id="button_wrap"></span>').append(favorite_button);
-	//button_wrap.data('symbol', symbol);
 	button_wrap.appendTo(header);
-	//favorite_button.css("float", "right");
-
-
+	
 	var img_src = "http://chart.finance.yahoo.com/z?s="+ symbol + "&t=1d&q=2&l=off&z=1";
 	var img = $('<img src="' + img_src + '" alt="" width="90%" class="featuredImg">');
 

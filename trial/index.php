@@ -143,7 +143,8 @@ $login_success = login_check($mysqli);
 						print('<div class="list-group">');
 						print('<a href="#" class="list-group-item">');
 						print('<p class="list-group-item-text">' . 
-							$value . "(" . $stock_symbol_array[$key] . ")" . '</p></a></div>');
+							$value . "(" . $stock_symbol_array[$key] . ')<span class="cancel glyphicon glyphicon-remove"></span>' 
+							. '</p></a></div>');
 					}
 					?>
 				</div>	
