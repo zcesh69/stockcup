@@ -1,4 +1,6 @@
 <?php
+// most login related code are referenced from http://www.wikihow.com/Create-a-Secure-Login-Script-in-PHP-and-MySQL
+
 include 'db_connect.php';
  
 $error_msg = "";

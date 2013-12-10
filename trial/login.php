@@ -7,6 +7,8 @@
     </head>
     <body>
         <?php 
+        // most login related code are referenced from http://www.wikihow.com/Create-a-Secure-Login-Script-in-PHP-and-MySQL
+
             if(isset($_GET['error'])) { 
                 echo 'Error Logging In!'; 
             } 

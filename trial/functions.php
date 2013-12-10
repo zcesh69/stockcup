@@ -1,4 +1,6 @@
 <?php
+// most login related code are referenced from http://www.wikihow.com/Create-a-Secure-Login-Script-in-PHP-and-MySQL
+
 include 'psl-config.php';
  
 function sec_session_start() {
